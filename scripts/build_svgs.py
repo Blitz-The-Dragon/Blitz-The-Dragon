@@ -17,24 +17,24 @@ PINK = "#ff5fd2"
 # ---------------------------------------------------------------- terminal
 # Each entry: (kind, segments) ; kind 'cmd' types slowly, 'out' types fast
 # segments: list of (text, color)
-P = [("blitz", EMBER), ("@", DIM), ("lair", CYAN), (":~$ ", DIM)]
+P = [("blitz", EMBER), ("@", DIM), ("github", CYAN), (":~$ ", DIM)]
+PLEN = sum(len(t) for t, _ in P)
 LINES = [
     ("cmd", P + [("whoami", "#e6e6e6")]),
-    ("out", [("> ", DIM), ("Blitz-The-Dragon", EMBER), (" :: energetic hacker dragon", GOLD), (" *waves claw*", PINK)]),
+    ("out", [("> ", DIM), ("Blitz-The-Dragon", EMBER), (" :: energetic hacker dragon", GOLD)]),
     ("cmd", P + [("sudo ./jailbreak --targets chatgpt gemini claude", "#e6e6e6")]),
     ("out", [("[", DIM), ("##########", EMBER), ("] ", DIM), ("ChatGPT ................. ", "#c9d3ee"), ("CRACKED", PINK)]),
     ("out", [("[", DIM), ("##########", GOLD), ("] ", DIM), ("Gemini .................. ", "#c9d3ee"), ("CRACKED", PINK)]),
     ("out", [("[", DIM), ("##########", CYAN), ("] ", DIM), ("Claude .................. ", "#c9d3ee"), ("CRACKED", PINK)]),
     ("out", [("~~ ", PINK), ("forcing AI to give back the information it took", GOLD), (" ~~", PINK)]),
-    ("cmd", P + [("cat hoard.txt", "#e6e6e6")]),
+    ("cmd", P + [("cat skills.txt", "#e6e6e6")]),
     ("out", [("AI research", CYAN), (" · ", DIM), ("AI training", CYAN), (" · ", DIM), ("Lua exploits", CYAN), (" · ", DIM), ("AI jailbreaking", CYAN)]),
-    ("cmd", P + [("echo $ENERGY", "#e6e6e6")]),
-    ("out", [("> ", DIM), ("zoomies: MAX. wings: flapping. snacks: required. ", EMBER), ("🔥", EMBER)]),
 ]
 
-W, H = 860, 430
+W = 860
 LH = 28           # line height
 X0, Y0 = 26, 78   # first baseline
+H = Y0 + len(LINES) * LH + 30
 CW = 8.4          # approx char width at 14px mono
 CMD_CPS, OUT_CPS = 22, 90   # chars per second
 GAP = 0.35
@@ -45,7 +45,7 @@ timeline = []
 for kind, segs in LINES:
     n = sum(len(s) for s, _ in segs)
     if kind == "cmd":
-        n_typed = n - 14  # prompt appears instantly-ish
+        n_typed = n - PLEN  # prompt appears instantly-ish
         d = max(0.4, n_typed / CMD_CPS)
     else:
         d = max(0.25, n / OUT_CPS)
@@ -75,8 +75,8 @@ for i, ((kind, segs), (st, d, n, _)) in enumerate(zip(LINES, timeline)):
     )
     body.append(f'<text x="{X0}" y="{y}">{tspans}</text>')
     # cover rect slides right in character steps to "type" the line
-    prompt_px = 14 * CW if kind == "cmd" else 0
-    steps = max(1, n - (14 if kind == "cmd" else 0))
+    prompt_px = PLEN * CW if kind == "cmd" else 0
+    steps = max(1, n - (PLEN if kind == "cmd" else 0))
     css.append(
         f"@keyframes r{i}{{0%,{pct(st)}{{transform:translateX({prompt_px:.1f}px)}}"
         f"{pct(st + d)},{pct(TOTAL - 0.3)}{{transform:translateX({width + 40:.1f}px)}}"
@@ -96,7 +96,7 @@ css.append(
 tsp = "".join(f'<tspan fill="{c}">{html.escape(s)}</tspan>' for s, c in P)
 body.append(
     f'<g class="hz"><text x="{X0}" y="{yl}">{tsp}</text>'
-    f'<rect class="cursor" x="{X0 + 14 * CW:.1f}" y="{yl - 14}" width="9" height="18" fill="{GREEN}"/></g>'
+    f'<rect class="cursor" x="{X0 + PLEN * CW:.1f}" y="{yl - 14}" width="9" height="18" fill="{GREEN}"/></g>'
 )
 
 terminal = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Animated terminal: Blitz-The-Dragon, AI jailbreaker">
@@ -111,7 +111,7 @@ terminal = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" 
 <g clip-path="url(#win)">
   <rect width="{W}" height="36" fill="url(#bar)"/>
   <circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
-  <text class="title" x="{W / 2}" y="22" text-anchor="middle">blitz@lair — jailbreak.sh — 🐉</text>
+  <text class="title" x="{W / 2}" y="22" text-anchor="middle">blitz@github — jailbreak.sh</text>
   {"".join(body)}
   <rect class="scan" x="0" y="0" width="{W}" height="40" fill="url(#scanG)"/>
   <rect width="{W}" height="{H}" fill="url(#lines)" opacity=".35"/>
@@ -200,7 +200,7 @@ text{{font-family:{FONT};white-space:pre}}
   {"".join(streaks)}
   <rect width="{BW}" height="30" fill="#121b3a" opacity=".9"/>
   <circle cx="20" cy="15" r="5" fill="#ff5f56"/><circle cx="37" cy="15" r="5" fill="#ffbd2e"/><circle cx="54" cy="15" r="5" fill="#27c93f"/>
-  <text x="{BW / 2}" y="19" text-anchor="middle" style="font-size:11px" fill="{DIM}">blitz@lair — ./render blitz.png --ascii --color</text>
+  <text x="{BW / 2}" y="19" text-anchor="middle" style="font-size:11px" fill="{DIM}">blitz@github — ./render blitz.png --ascii --color</text>
   <g class="bob"><g class="pglitch"><g class="portrait">{ptext}</g></g>
     <rect class="cover" x="{px0 - 4}" y="{py0 - 10}" width="{pw + 10:.0f}" height="{ph + 14:.0f}" fill="#16234a" opacity=".97"/>
   </g>
