@@ -73,7 +73,7 @@ for i, ((kind, segs), (st, d, n, _)) in enumerate(zip(LINES, timeline)):
     tspans = "".join(
         f'<tspan fill="{c}">{html.escape(s)}</tspan>' for s, c in segs
     )
-    body.append(f'<text x="{X0}" y="{y}">{tspans}</text>')
+    body.append(f'<text xml:space="preserve" x="{X0}" y="{y}">{tspans}</text>')
     # cover rect slides right in character steps to "type" the line
     prompt_px = PLEN * CW if kind == "cmd" else 0
     steps = max(1, n - (PLEN if kind == "cmd" else 0))
@@ -85,7 +85,7 @@ for i, ((kind, segs), (st, d, n, _)) in enumerate(zip(LINES, timeline)):
         f".r{i}{{animation:r{i} {TOTAL:.2f}s infinite;animation-timing-function:steps({steps},end)}}"
         f".h{i}{{animation:h{i} {TOTAL:.2f}s step-end infinite}}"
     )
-    body[-1] = f'<g class="h{i}">{body[-1]}<rect class="r{i}" x="{X0 - 2}" y="{y - 17}" width="{W}" height="{LH}" fill="{BG}"/></g>'
+    body[-1] = f'<g class="h{i}">{body[-1]}<rect class="r{i}" transform="translate({width + 40:.1f},0)" x="{X0 - 2}" y="{y - 17}" width="{W}" height="{LH}" fill="{BG}"/></g>'
 
 # trailing prompt with blinking cursor
 yl = Y0 + len(LINES) * LH
@@ -95,7 +95,7 @@ css.append(
 )
 tsp = "".join(f'<tspan fill="{c}">{html.escape(s)}</tspan>' for s, c in P)
 body.append(
-    f'<g class="hz"><text x="{X0}" y="{yl}">{tsp}</text>'
+    f'<g class="hz"><text xml:space="preserve" x="{X0}" y="{yl}">{tsp}</text>'
     f'<rect class="cursor" x="{X0 + PLEN * CW:.1f}" y="{yl - 14}" width="9" height="18" fill="{GREEN}"/></g>'
 )
 
@@ -146,7 +146,7 @@ for k in range(12):
     col = random.choice([PINK, CYAN, "#b58cff"])
     d = random.uniform(1.6, 3.2)
     streaks.append(
-        f'<line class="sk" style="animation-duration:{d:.2f}s;animation-delay:-{random.uniform(0, d):.2f}s" '
+        f'<line class="sk" opacity="0" style="animation-duration:{d:.2f}s;animation-delay:-{random.uniform(0, d):.2f}s" '
         f'x1="0" y1="{y}" x2="{ln}" y2="{y - ln * .35:.0f}" stroke="{col}" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 2"/>'
     )
 
@@ -160,8 +160,8 @@ for i, name in enumerate(TARGETS):
         f'<style>@keyframes lk{i}{{0%,{bp(t0)}{{opacity:1}}{bp(t0 + .01)},{bp(LOOP - .2)}{{opacity:0}}100%{{opacity:1}}}}'
         f'@keyframes ok{i}{{0%,{bp(t0)}{{opacity:0}}{bp(t0 + .01)},{bp(LOOP - .2)}{{opacity:1}}100%{{opacity:0}}}}'
         f'.lk{i}{{animation:lk{i} {LOOP}s step-end infinite}}.ok{i}{{animation:ok{i} {LOOP}s step-end infinite}}</style>'
-        f'<text class="tgt lk{i}" x="{tx}" y="{y}"><tspan fill="{DIM}">[ LOCKED  ]</tspan> <tspan fill="#c9d3ee">{name}</tspan></text>'
-        f'<text class="tgt ok{i}" x="{tx}" y="{y}"><tspan fill="{PINK}">[ CRACKED ]</tspan> <tspan fill="{GOLD}">{name}</tspan> <tspan fill="{EMBER}">🔓</tspan></text>'
+        f'<text class="tgt lk{i}" opacity="0" xml:space="preserve" x="{tx}" y="{y}"><tspan fill="{DIM}">[ LOCKED  ]</tspan> <tspan fill="#c9d3ee">{name}</tspan></text>'
+        f'<text class="tgt ok{i}" xml:space="preserve" x="{tx}" y="{y}"><tspan fill="{PINK}">[ CRACKED ]</tspan> <tspan fill="{GOLD}">{name}</tspan> <tspan fill="{EMBER}">🔓</tspan></text>'
     )
 
 banner = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{BW}" height="{BH}" viewBox="0 0 {BW} {BH}" role="img" aria-label="Blitz the energetic hacker dragon, rendered in ASCII">
@@ -202,7 +202,7 @@ text{{font-family:{FONT};white-space:pre}}
   <circle cx="20" cy="15" r="5" fill="#ff5f56"/><circle cx="37" cy="15" r="5" fill="#ffbd2e"/><circle cx="54" cy="15" r="5" fill="#27c93f"/>
   <text x="{BW / 2}" y="19" text-anchor="middle" style="font-size:11px" fill="{DIM}">blitz@github — ./render blitz.png --ascii --color</text>
   <g class="bob"><g class="pglitch"><g class="portrait">{ptext}</g></g>
-    <rect class="cover" x="{px0 - 4}" y="{py0 - 10}" width="{pw + 10:.0f}" height="{ph + 14:.0f}" fill="#16234a" opacity=".97"/>
+    <rect class="cover" transform="translate(0,{ph + 20:.0f})" x="{px0 - 4}" y="{py0 - 10}" width="{pw + 10:.0f}" height="{ph + 14:.0f}" fill="#16234a" opacity=".97"/>
   </g>
 </g>
 <g>

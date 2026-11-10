@@ -47,5 +47,5 @@ def to_svg(lines, x0, y0, lh):
             (f'<tspan fill="{c}">{html.escape(s)}</tspan>' if c else html.escape(s))
             for s, c in spans
         )
-        out.append(f'<text class="px" x="{x0}" y="{y0 + i * lh:.1f}">{ts}</text>')
+        out.append(f'<text class="px" xml:space="preserve" x="{x0}" y="{y0 + i * lh:.1f}">{ts}</text>')
     return out
