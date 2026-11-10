@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" role="img" aria-label="Blitz the Dragon breathing fire">
+<style>
+text{font-family:'JetBrains Mono','Fira Code','Cascadia Code',Consolas,Menlo,'DejaVu Sans Mono',monospace;white-space:pre}
+.dr text{font-size:14px;fill:#39ff88}
+.dr{filter:url(#glow);animation:hover 4s ease-in-out infinite}
+@keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes fl{0%{transform:translate(0,0) scale(.6);opacity:0}10%{opacity:1}100%{transform:translate(430px,var(--dy,0px)) scale(2.2);opacity:0}}
+.fl{animation:fl 2.86s linear infinite;transform-box:fill-box;transform-origin:center}
+.name{font-size:52px;font-weight:800;letter-spacing:4px}
+@keyframes glitch{0%,92%,100%{transform:translate(0,0)}93%{transform:translate(-3px,1px)}95%{transform:translate(3px,-1px)}97%{transform:translate(-1px,2px)}}
+.g1{animation:glitch 3s infinite;fill:#ff3b3b;opacity:.7}
+.g2{animation:glitch 3s infinite reverse;fill:#5fd7ff;opacity:.6}
+.sub{font-size:15px;fill:#ffc23d;letter-spacing:3px}
+@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+.sub{animation:pulse 2.4s ease-in-out infinite}
+</style>
+<defs>
+  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="fire" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <radialGradient id="bgG" cx=".3" cy=".4" r=".9"><stop offset="0" stop-color="#1a120c"/><stop offset="1" stop-color="#0b0f0c"/></radialGradient>
+</defs>
+<rect x="1" y="1" width="858" height="298" rx="12" fill="url(#bgG)" stroke="#ff6a1a" stroke-opacity=".55"/>
+<g filter="url(#fire)"><text class="fl" style="animation-delay:-0.00s;font-size:20px" x="413" y="131" fill="#ff6a1a">▓</text><text class="fl" style="animation-delay:-0.11s;font-size:18px" x="413" y="124" fill="#ff6a1a">▒</text><text class="fl" style="animation-delay:-0.22s;font-size:14px" x="413" y="147" fill="#ff6a1a">█</text><text class="fl" style="animation-delay:-0.33s;font-size:16px" x="413" y="134" fill="#ff6a1a">▒</text><text class="fl" style="animation-delay:-0.44s;font-size:14px" x="413" y="137" fill="#ffc23d">░</text><text class="fl" style="animation-delay:-0.55s;font-size:20px" x="413" y="140" fill="#ff6a1a">░</text><text class="fl" style="animation-delay:-0.66s;font-size:16px" x="413" y="149" fill="#ff3b3b">░</text><text class="fl" style="animation-delay:-0.77s;font-size:18px" x="413" y="134" fill="#ffc23d">▒</text><text class="fl" style="animation-delay:-0.88s;font-size:18px" x="413" y="125" fill="#ff6a1a">█</text><text class="fl" style="animation-delay:-0.99s;font-size:14px" x="413" y="137" fill="#ffc23d">▒</text><text class="fl" style="animation-delay:-1.10s;font-size:18px" x="413" y="136" fill="#ff9a3d">*</text><text class="fl" style="animation-delay:-1.21s;font-size:18px" x="413" y="138" fill="#ff3b3b">~</text><text class="fl" style="animation-delay:-1.32s;font-size:16px" x="413" y="129" fill="#ff6a1a">▓</text><text class="fl" style="animation-delay:-1.43s;font-size:18px" x="413" y="138" fill="#ff9a3d">~</text><text class="fl" style="animation-delay:-1.54s;font-size:14px" x="413" y="130" fill="#ff9a3d">▒</text><text class="fl" style="animation-delay:-1.65s;font-size:16px" x="413" y="127" fill="#ff9a3d">░</text><text class="fl" style="animation-delay:-1.76s;font-size:18px" x="413" y="134" fill="#ff3b3b">▒</text><text class="fl" style="animation-delay:-1.87s;font-size:20px" x="413" y="141" fill="#ff6a1a">~</text><text class="fl" style="animation-delay:-1.98s;font-size:20px" x="413" y="146" fill="#ff6a1a">▒</text><text class="fl" style="animation-delay:-2.09s;font-size:20px" x="413" y="124" fill="#ff3b3b">▒</text><text class="fl" style="animation-delay:-2.20s;font-size:14px" x="413" y="142" fill="#ff9a3d">░</text><text class="fl" style="animation-delay:-2.31s;font-size:20px" x="413" y="132" fill="#ff6a1a">▒</text><text class="fl" style="animation-delay:-2.42s;font-size:16px" x="413" y="128" fill="#ffc23d">▒</text><text class="fl" style="animation-delay:-2.53s;font-size:14px" x="413" y="133" fill="#ffc23d">~</text><text class="fl" style="animation-delay:-2.64s;font-size:16px" x="413" y="135" fill="#ff9a3d">▒</text><text class="fl" style="animation-delay:-2.75s;font-size:20px" x="413" y="146" fill="#ff3b3b">▒</text></g>
+<g class="dr"><text x="18" y="40">            __        __</text><text x="18" y="60">           /  \______/  \___</text><text x="18" y="80">          /  /\        /\   \__</text><text x="18" y="100">         |  /  \  __  /  \     `-.___</text><text x="18" y="120">         | |  (●)/  \(●)  |         _ `--._</text><text x="18" y="140">          \ \    \__/    / \___..--&#x27; `\    `&gt;</text><text x="18" y="160">           \ `.  ____  .&#x27;          ___/ /\/</text><text x="18" y="180">            `-.\/VVVV\/.-&#x27;   __.--&#x27;   _/</text><text x="18" y="200">               \\____//  _.-&#x27;     __.-&#x27;</text><text x="18" y="220">                `----&#x27;--&#x27;    __.-&#x27;</text><text x="18" y="240">                        \___/</text></g>
+<g text-anchor="end">
+  <text class="name g1" x="832" y="222">BLITZ</text>
+  <text class="name g2" x="832" y="222">BLITZ</text>
+  <text class="name" x="832" y="222" fill="#f2f2f2">BLITZ</text>
+  <text class="sub" x="830" y="252">// THE AI JAILBREAKER DRAGON</text>
+</g>
+</svg>
